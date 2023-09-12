@@ -20,6 +20,9 @@ class Signature
      */
     protected string $hashSecret;
 
+    /**
+     * Đối tượng singleton.
+     */
     protected static ?Signature $instance = null;
 
     /**
@@ -45,7 +48,10 @@ class Signature
         return static::$instance;
     }
 
-    public static function swap(?Signature $signature)
+    /**
+     * Swap đối tượng singleton.
+     */
+    public static function swap(?Signature $signature): void
     {
         static::$instance = $signature;
     }

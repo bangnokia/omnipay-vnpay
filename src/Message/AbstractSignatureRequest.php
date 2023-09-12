@@ -51,7 +51,6 @@ abstract class AbstractSignatureRequest extends AbstractRequest
      */
     public function getData(): array
     {
-        // refactor code above without call_user_func_array
         $this->validate(...$this->getSignatureParameters());
 
         $parameters = $this->getParameters();
