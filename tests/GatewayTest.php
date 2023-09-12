@@ -14,6 +14,7 @@ use Omnipay\Common\Message\RedirectResponseInterface;
 use Omnipay\Omnipay;
 use Omnipay\Tests\GatewayTestCase;
 use Omnipay\VNPay\Message\PurchaseResponse;
+use Omnipay\VNPay\Support\Signature;
 
 /**
  * @author Vuong Minh <vuongxuongminh@gmail.com>
@@ -80,12 +81,12 @@ class GatewayTest extends GatewayTestCase
             'vnp_OrderInfo' => 'Thanh+toan+don+hang+thoi+gian%3A+2017-08-29+15%3A27%3A02',
             'vnp_PayDate' => 20170829153052,
             'vnp_ResponseCode' => '00',
-            'vnp_TmnCode' => '2QXUI4J4',
+            'vnp_TmnCode' => 'COCOSIN',
             'vnp_TransactionNo' => 12996460,
             'vnp_TxnRef' => 23597,
-            'vnp_SecureHash' => '32c2be7c9a4282ca13ce4a5e443902fe',
-            'vnp_SecureHashType' => 'md5',
+            'vnp_SecureHash' => 'f0de0729898a035116feb908a36a55fad7e9c7ebb5ded3e752a1dad891e6af2bbdd6f56505b6664bfc417422dae11c8813576f209e62c10f4919f7db5d37124f',
         ]);
+
         $response = call_user_func([$this->gateway, $requestMethod])->send();
 
         $this->assertTrue($response->isSuccessful());

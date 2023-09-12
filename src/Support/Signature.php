@@ -23,26 +23,14 @@ class Signature
     protected $hashSecret;
 
     /**
-     * Loại thuật toán mã hóa sẽ sử dụng.
-     *
-     * @var string
-     */
-    protected $hashType;
-
-    /**
      * Khởi tạo đối tượng DataSignature.
      *
      * @param  string  $hashSecret
      * @param  string  $hashType
      * @throws InvalidArgumentException
      */
-    public function __construct(string $hashSecret, string $hashType = 'sha512')
+    public function __construct(string $hashSecret)
     {
-        if (! $this->isSupportHashType($hashType)) {
-            throw new InvalidArgumentException(sprintf('Hash type: `%s` is not supported by VNPay', $hashType));
-        }
-
-        $this->hashType = $hashType;
         $this->hashSecret = $hashSecret;
     }
 
@@ -71,16 +59,5 @@ class Signature
         $actual = $this->generate($data);
 
         return 0 === strcasecmp($expect, $actual);
-    }
-
-    /**
-     * Phương thức cho biết loại mã hóa truyền vào có được VNPay hổ trợ hay không.
-     *
-     * @param  string  $type
-     * @return bool
-     */
-    protected function isSupportHashType(string $type): bool
-    {
-        return 0 === strcasecmp($type, 'sha512');
     }
 }
