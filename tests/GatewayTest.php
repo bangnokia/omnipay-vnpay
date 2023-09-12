@@ -19,6 +19,10 @@ use Omnipay\VNPay\Support\Signature;
 /**
  * @author Vuong Minh <vuongxuongminh@gmail.com>
  * @since 1.0.0
+ *
+ * @runTestsInSeparateProcesses
+ * @runInSeparateProcess
+ * @preserveGlobalState disabled
  */
 class GatewayTest extends GatewayTestCase
 {
@@ -117,6 +121,10 @@ class GatewayTest extends GatewayTestCase
     public function testQueryTransactionSuccess()
     {
         $this->setMockHttpResponse('QueryTransactionSuccess.txt');
+        mock('overload:'.Signature::class, [
+            'validate' => true,
+            'generate' => 'foobar'
+        ])->makePartial();
         $response = $this->gateway->queryTransaction([
             'vnp_TransDate' => 20190705151126,
             'vnp_TxnRef' => 1562314234,
@@ -134,6 +142,10 @@ class GatewayTest extends GatewayTestCase
     public function testQueryTransactionFailure()
     {
         $this->setMockHttpResponse('QueryTransactionFailure.txt');
+        mock('overload:'.Signature::class, [
+            'validate' => true,
+            'generate' => 'foobar'
+        ])->makePartial();
         $response = $this->gateway->queryTransaction([
             'vnp_TransDate' => 20190705151126,
             'vnp_TxnRef' => 15623142234,
@@ -149,6 +161,10 @@ class GatewayTest extends GatewayTestCase
     public function testRefundSuccess()
     {
         $this->setMockHttpResponse('RefundSuccess.txt');
+        mock('overload:'.Signature::class, [
+            'validate' => true,
+            'generate' => 'foobar'
+        ])->makePartial();
         $response = $this->gateway->refund([
             'vnp_Amount' => 10000,
             'vnp_TransactionType' => '03',

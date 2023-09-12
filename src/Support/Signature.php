@@ -26,7 +26,6 @@ class Signature
      * Khởi tạo đối tượng DataSignature.
      *
      * @param  string  $hashSecret
-     * @param  string  $hashType
      * @throws InvalidArgumentException
      */
     public function __construct(string $hashSecret)

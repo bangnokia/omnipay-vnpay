@@ -10,6 +10,7 @@ namespace Omnipay\VNPay\Tests\Message;
 
 use Omnipay\Tests\TestCase;
 use Omnipay\VNPay\Message\SignatureResponse;
+use Omnipay\VNPay\Support\Signature;
 
 /**
  * @author Vuong Minh <vuongxuongminh@gmail.com>
@@ -41,8 +42,7 @@ class SignatureResponseTest extends TestCase
             'vnp_TmnCode' => '2QXUI4J4',
             'vnp_TransactionNo' => 12996460,
             'vnp_TxnRef' => 23597,
-            'vnp_SecureHash' => '32c2be7c9a4282ca13ce4a5e443902fe',
-            'vnp_SecureHashType' => 'md5',
+            'vnp_SecureHash' => 'c9acf5dc3da383d6f415bee855e5286c53f3b75da755b32328db74f0509fcaa9d874189a91f4f3fbb5d5ed90fc3f34176f8f103401105f5e9406b0b1a6bc3b2f',
         ]);
         $this->assertFalse($response->isPending());
         $this->assertTrue($response->isSuccessful());
