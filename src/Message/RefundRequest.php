@@ -42,7 +42,7 @@ class RefundRequest extends AbstractSignatureRequest
      */
     public function sendData($data): SignatureResponse
     {
-        $query = http_build_query($data, null, '&', PHP_QUERY_RFC3986);
+        $query = http_build_query($data, '', '&', PHP_QUERY_RFC3986);
         $requestUrl = $this->getEndpoint().'?'.$query;
         $response = $this->httpClient->request('GET', $requestUrl);
         $responseRawData = $response->getBody()->getContents();
