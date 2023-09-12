@@ -30,9 +30,7 @@ trait ResponseSignatureValidation
         }
 
         $dataSignature = array_filter($this->getData(), function ($parameter) {
-            return 0 === strpos($parameter, 'vnp_')
-                && 'vnp_SecureHash' !== $parameter
-                && 'vnp_SecureHashType' !== $parameter;
+            return 0 === strpos($parameter, 'vnp_') && 'vnp_SecureHash' !== $parameter;
         }, ARRAY_FILTER_USE_KEY);
 
         $signature = new Signature($this->getRequest()->getVnpHashSecret());
