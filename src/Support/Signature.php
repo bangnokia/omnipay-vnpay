@@ -36,9 +36,9 @@ class Signature
     /**
      * Tạo đối tượng singleton.
      */
-    public static function make(string $hashSecret): Signature
+    public static function make(string $hashSecret, bool $forceCreate = false): Signature
     {
-        if (static::$instance === null) {
+        if (static::$instance === null || $forceCreate) {
             static::$instance = new static($hashSecret);
         }
 
