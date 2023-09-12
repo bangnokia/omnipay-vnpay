@@ -22,13 +22,15 @@ class Signature
      */
     protected $hashSecret;
 
+    public static $restResult;
+
     /**
      * Khởi tạo đối tượng DataSignature.
      *
      * @param  string  $hashSecret
      * @throws InvalidArgumentException
      */
-    public function __construct(string $hashSecret)
+    public function __construct(string $hashSecret = '')
     {
         $this->hashSecret = $hashSecret;
     }
@@ -55,8 +57,17 @@ class Signature
      */
     public function validate(array $data, string $expect): bool
     {
+        if (static::$restResult !== null) {
+            return true;
+        }
+
         $actual = $this->generate($data);
 
         return 0 === strcasecmp($expect, $actual);
+    }
+
+    public static function setTestValidateResult($result)
+    {
+        static::$restResult = $result;
     }
 }

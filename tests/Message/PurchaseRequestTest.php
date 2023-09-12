@@ -27,6 +27,7 @@ class PurchaseRequestTest extends TestCase
         $client = $this->getHttpClient();
         $request = $this->getHttpRequest();
         $this->request = new PurchaseRequest($client, $request);
+        $this->request->initialize();
     }
 
     public function testGetData()

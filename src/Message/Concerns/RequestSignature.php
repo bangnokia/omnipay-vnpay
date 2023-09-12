@@ -24,11 +24,12 @@ trait RequestSignature
     protected function generateSignature(string $hashType = 'sha512'): string
     {
         $data = [];
-        $signature = new Signature($this->getVnpHashSecret());
 
         foreach ($this->getSignatureParameters() as $parameter) {
             $data[$parameter] = $this->getParameter($parameter);
         }
+
+        $signature = new Signature($this->getVnpHashSecret());
 
         return $signature->generate($data);
     }

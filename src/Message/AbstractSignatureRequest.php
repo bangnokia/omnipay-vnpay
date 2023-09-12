@@ -7,6 +7,7 @@
 
 namespace Omnipay\VNPay\Message;
 
+use Omnipay\Common\Exception\InvalidRequestException;
 use Omnipay\Common\Message\AbstractRequest;
 use Omnipay\VNPay\Concerns\Parameters;
 use Omnipay\VNPay\Concerns\ParametersNormalization;
@@ -46,13 +47,12 @@ abstract class AbstractSignatureRequest extends AbstractRequest
 
     /**
      * {@inheritdoc}
+     * @throws InvalidRequestException
      */
     public function getData(): array
     {
-        call_user_func_array(
-            [$this, 'validate'],
-            $this->getSignatureParameters()
-        );
+        // refactor code above without call_user_func_array
+        $this->validate(...$this->getSignatureParameters());
 
         $parameters = $this->getParameters();
         $parameters['vnp_SecureHash'] = $this->generateSignature();
@@ -78,7 +78,7 @@ abstract class AbstractSignatureRequest extends AbstractRequest
      * Thiết lập mã đơn hàng cần thực thi tác vụ.
      * Đây là phương thức ánh xạ của [[setTransactionId()]].
      *
-     * @param  null|string  $ref
+     * @param null|string $ref
      *
      * @return $this
      * @see setTransactionId
@@ -117,7 +117,7 @@ abstract class AbstractSignatureRequest extends AbstractRequest
     /**
      * Thiết lập thông tin đơn hàng hay lý do truy vấn đến VNPay.
      *
-     * @param  null|string  $info
+     * @param null|string $info
      * @return $this
      */
     public function setVnpOrderInfo(?string $info)
@@ -140,7 +140,7 @@ abstract class AbstractSignatureRequest extends AbstractRequest
      * Thiết lập thời gian khởi tạo truy vấn đến VNPay.
      * Mặc định sẽ là thời gian hiện tại.
      *
-     * @param  null|string  $date
+     * @param null|string $date
      * @return $this
      * @see setReturnUrl
      */
@@ -176,7 +176,7 @@ abstract class AbstractSignatureRequest extends AbstractRequest
      * Đây là phương thức ánh xạ của [[setClientIp()]].
      * Mặc định nếu không thiết lập sẽ là IP của khách.
      *
-     * @param  null|string  $ip
+     * @param null|string $ip
      * @return $this
      * @see setClientIp
      */
@@ -215,7 +215,7 @@ abstract class AbstractSignatureRequest extends AbstractRequest
     /**
      * Thiết lập phương thức mã hóa dùng để tạo chữ ký dự liệu.
      *
-     * @param  null|string  $secureHashType
+     * @param null|string $secureHashType
      *
      * @return $this
      * @since 1.0.1
