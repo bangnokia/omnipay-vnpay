@@ -17,12 +17,10 @@ class Signature
 {
     /**
      * Khóa bí mật dùng để tạo và kiểm tra chữ ký dữ liệu.
-     *
-     * @var string
      */
-    protected $hashSecret;
+    protected string $hashSecret;
 
-    public static $restResult;
+    protected static ?Signature $instance = null;
 
     /**
      * Khởi tạo đối tượng DataSignature.
@@ -30,9 +28,26 @@ class Signature
      * @param  string  $hashSecret
      * @throws InvalidArgumentException
      */
-    public function __construct(string $hashSecret)
+    private function __construct(string $hashSecret)
     {
         $this->hashSecret = $hashSecret;
+    }
+
+    /**
+     * Tạo đối tượng singleton.
+     */
+    public static function make(string $hashSecret): Signature
+    {
+        if (static::$instance === null) {
+            static::$instance = new static($hashSecret);
+        }
+
+        return static::$instance;
+    }
+
+    public static function swap(?Signature $signature)
+    {
+        static::$instance = $signature;
     }
 
     /**
@@ -57,17 +72,8 @@ class Signature
      */
     public function validate(array $data, string $expect): bool
     {
-        if (static::$restResult !== null) {
-            return true;
-        }
-
         $actual = $this->generate($data);
 
         return 0 === strcasecmp($expect, $actual);
-    }
-
-    public static function setTestValidateResult($result)
-    {
-        static::$restResult = $result;
     }
 }

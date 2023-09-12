@@ -30,10 +30,10 @@ trait ResponseSignatureValidation
         }
 
         $dataSignature = array_filter($this->getData(), function ($parameter) {
-            return 0 === strpos($parameter, 'vnp_') && 'vnp_SecureHash' !== $parameter;
+            return 0 === strpos($parameter, 'vnp_') && $parameter !== 'vnp_SecureHash';
         }, ARRAY_FILTER_USE_KEY);
 
-        $signature = new Signature($this->getRequest()->getVnpHashSecret());
+        $signature = Signature::make($this->getRequest()->getVnpHashSecret());
 
         if (! $signature->validate($dataSignature, $data['vnp_SecureHash'])) {
             throw new InvalidResponseException('Data signature response from VNPay is invalid!');
