@@ -22,7 +22,7 @@ class IncomingRequestTest extends TestCase
      */
     private $request;
 
-    public function setUp()
+    public function setUp(): void
     {
         $client = $this->getHttpClient();
         $request = $this->getHttpRequest();

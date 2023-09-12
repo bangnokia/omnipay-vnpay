@@ -26,7 +26,7 @@ class GatewayTest extends GatewayTestCase
      */
     protected $gateway;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->gateway = Omnipay::create('VNPay', $this->getHttpClient(), $this->getHttpRequest());
         $this->gateway->setVnpTmnCode('COCOSIN');
