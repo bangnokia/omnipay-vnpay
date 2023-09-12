@@ -25,7 +25,7 @@ trait Parameters
     }
 
     /**
-     * Thiết lập mã Tmn.
+     * Thiết lập mã Version
      *
      * @param  null|string  $code
      * @return $this
