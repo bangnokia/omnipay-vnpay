@@ -26,7 +26,6 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: mbstring, pcntl, iconv
           coverage: none
 
       - name: Validate composer.json and composer.lock
