@@ -29,7 +29,7 @@ trait RequestSignature
             $data[$parameter] = $this->getParameter($parameter);
         }
 
-        $signature = Signature::make($this->getVnpHashSecret());
+        $signature = new Signature($this->getVnpHashSecret());
 
         return $signature->generate($data);
     }

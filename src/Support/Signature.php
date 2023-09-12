@@ -21,39 +21,14 @@ class Signature
     protected string $hashSecret;
 
     /**
-     * Đối tượng singleton.
-     */
-    protected static ?Signature $instance = null;
-
-    /**
      * Khởi tạo đối tượng DataSignature.
      *
      * @param  string  $hashSecret
      * @throws InvalidArgumentException
      */
-    private function __construct(string $hashSecret)
+    public function __construct(string $hashSecret)
     {
         $this->hashSecret = $hashSecret;
-    }
-
-    /**
-     * Tạo đối tượng singleton.
-     */
-    public static function make(string $hashSecret, bool $forceCreate = false): Signature
-    {
-        if (static::$instance === null || $forceCreate) {
-            static::$instance = new static($hashSecret);
-        }
-
-        return static::$instance;
-    }
-
-    /**
-     * Swap đối tượng singleton.
-     */
-    public static function swap(?Signature $signature): void
-    {
-        static::$instance = $signature;
     }
 
     /**

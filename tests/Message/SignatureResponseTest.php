@@ -27,11 +27,6 @@ class SignatureResponseTest extends TestCase
         $this->assertEquals(['example' => 'value', 'foo' => 'bar'], $response->getData());
     }
 
-    public function tearDown(): void
-    {
-        Signature::swap(null); // reset singleton
-    }
-
     public function testIncoming()
     {
         $request = $this->getMockRequest();

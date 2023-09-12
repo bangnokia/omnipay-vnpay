@@ -14,8 +14,6 @@ use Omnipay\Common\Message\RedirectResponseInterface;
 use Omnipay\Omnipay;
 use Omnipay\Tests\GatewayTestCase;
 use Omnipay\VNPay\Message\PurchaseResponse;
-use Omnipay\VNPay\Support\Signature;
-use Omnipay\VNPay\Tests\Mock\SignatureMock;
 
 /**
  * @author Vuong Minh <vuongxuongminh@gmail.com>
@@ -28,29 +26,16 @@ class GatewayTest extends GatewayTestCase
      */
     protected $gateway;
 
-    protected $mockSignature;
-
     protected function setUp(): void
     {
         $this->gateway = Omnipay::create('VNPay', $this->getHttpClient(), $this->getHttpRequest());
         $this->gateway->setVnpTmnCode('COCOSIN');
         $this->gateway->setVnpHashSecret('RAOEXHYVSDDIIENYWSLDIIZTANXUXZFJ');
         $this->gateway->setTestMode(true);
-
-        $this->mockSignature = mock(SignatureMock::class)->makePartial();
-    }
-
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-        Signature::swap(null);
     }
 
     public function testPurchaseSuccess()
     {
-        Signature::swap($this->mockSignature);
-        $this->mockSignature->shouldReceive('generate')->once();
-
         $response = $this->gateway->purchase([
             'vnp_TxnRef'    => time(),
             'vnp_OrderType' => 100000,
@@ -131,8 +116,6 @@ class GatewayTest extends GatewayTestCase
     public function testQueryTransactionSuccess()
     {
         $this->setMockHttpResponse('QueryTransactionSuccess.txt');
-        Signature::swap($this->mockSignature);
-        $this->mockSignature->shouldReceive('validate')->once()->andReturn(true);
 
         $response = $this->gateway->queryTransaction([
             'vnp_TransDate'     => 20190705151126,
@@ -151,7 +134,6 @@ class GatewayTest extends GatewayTestCase
     public function testQueryTransactionFailure()
     {
         $this->setMockHttpResponse('QueryTransactionFailure.txt');
-        Signature::swap($this->mockSignature);
 
         $response = $this->gateway->queryTransaction([
             'vnp_TransDate'     => 20190705151126,
@@ -168,8 +150,6 @@ class GatewayTest extends GatewayTestCase
     public function testRefundSuccess()
     {
         $this->setMockHttpResponse('RefundSuccess.txt');
-        Signature::swap($this->mockSignature);
-        $this->mockSignature->shouldReceive('validate')->once()->andReturn(true);
 
         $response = $this->gateway->refund([
             'vnp_Amount'          => 10000,
