@@ -30,7 +30,7 @@ class Signature
      * @param  string  $hashSecret
      * @throws InvalidArgumentException
      */
-    public function __construct(string $hashSecret = '')
+    public function __construct(string $hashSecret)
     {
         $this->hashSecret = $hashSecret;
     }
