@@ -37,6 +37,9 @@ abstract class AbstractSignatureRequest extends AbstractRequest
         $this->setVnpCreateDate(
             $this->getVnpCreateDate() ?? date('Ymdhis')
         );
+        $this->setVnpExpireDate(
+            $this->getVnpExpireDate() ?? date('Ymdhis', strtotime('+15 minutes'))
+        );
 
         return $this;
     }
@@ -52,9 +55,7 @@ abstract class AbstractSignatureRequest extends AbstractRequest
         );
 
         $parameters = $this->getParameters();
-        $parameters['vnp_SecureHash'] = $this->generateSignature(
-            $parameters['vnp_SecureHashType'] = $this->getSecureHashType() ?? 'sha256'
-        );
+        $parameters['vnp_SecureHash'] = $this->generateSignature();
 
         unset($parameters['vnp_HashSecret'], $parameters['testMode']);
 
@@ -146,6 +147,16 @@ abstract class AbstractSignatureRequest extends AbstractRequest
     public function setVnpCreateDate(?string $date)
     {
         return $this->setParameter('vnp_CreateDate', $date);
+    }
+
+    public function getVnpExpireDate(): ?string
+    {
+        return $this->getParameter('vnp_ExpireDate');
+    }
+
+    public function setVnpExpireDate(string $date)
+    {
+        $this->setParameter('vnp_ExpireDate', $date);
     }
 
     /**

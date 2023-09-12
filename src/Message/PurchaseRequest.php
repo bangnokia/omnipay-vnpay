@@ -248,7 +248,7 @@ class PurchaseRequest extends AbstractSignatureRequest
     protected function getSignatureParameters(): array
     {
         $parameters = [
-            'vnp_CreateDate', 'vnp_IpAddr', 'vnp_ReturnUrl', 'vnp_Amount', 'vnp_OrderType', 'vnp_OrderInfo',
+            'vnp_CreateDate', 'vnp_ExpireDate', 'vnp_IpAddr', 'vnp_ReturnUrl', 'vnp_Amount', 'vnp_OrderType', 'vnp_OrderInfo',
             'vnp_TxnRef', 'vnp_CurrCode', 'vnp_Locale', 'vnp_TmnCode', 'vnp_Command', 'vnp_Version',
         ];
 
