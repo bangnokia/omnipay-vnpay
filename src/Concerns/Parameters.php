@@ -15,7 +15,7 @@ namespace Omnipay\VNPay\Concerns;
 trait Parameters
 {
     /**
-     * Trả về mã Tmn do VNPay cấp.
+     * Trả về mã Vesion
      *
      * @return null|string
      */
