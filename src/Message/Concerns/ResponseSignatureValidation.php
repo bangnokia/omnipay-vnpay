@@ -36,7 +36,7 @@ trait ResponseSignatureValidation
         $signature = new Signature($this->getRequest()->getVnpHashSecret());
 
         if (! $signature->validate($dataSignature, $data['vnp_SecureHash'])) {
-            throw new InvalidResponseException(sprintf('Data signature response from VNPay is invalid!'));
+            throw new InvalidResponseException('Data signature response from VNPay is invalid!');
         }
     }
 }
