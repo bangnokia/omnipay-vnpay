@@ -1,5 +1,5 @@
 {
-    "name": "phpviet/omnipay-vnpay",
+    "name": "swebvn/omnipay-vnpay",
     "type": "library",
     "description": "Thư viện hổ trợ tích hợp cổng thanh toán VNPay.",
     "keywords": [
@@ -10,7 +10,7 @@
         "payment-gateway",
         "vietnam-payment-gateway"
     ],
-    "homepage": "https://github.com/phpviet/omnipay-vnpay",
+    "homepage": "https://github.com/swebvn/omnipay-vnpay",
     "license": "MIT",
     "authors": [
         {
