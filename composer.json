@@ -42,10 +42,7 @@
         "test": "\"vendor/bin/phpunit\""
     },
     "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "php-http/discovery": false
-        }
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {
