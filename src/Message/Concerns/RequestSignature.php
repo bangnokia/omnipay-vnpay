@@ -18,10 +18,9 @@ trait RequestSignature
     /**
      * Trả về chữ ký điện tử gửi đến VNPay dựa theo [[getSignatureParameters()]].
      *
-     * @param  string  $hashType
      * @return string
      */
-    protected function generateSignature(string $hashType = 'sha512'): string
+    protected function generateSignature(): string
     {
         $data = [];
 
